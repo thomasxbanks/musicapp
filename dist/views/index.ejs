@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head') %>
+
+<body>
+  <%- include('masthead') %>
+
+	<main class="grid_container grid_row grid_wrap content-center central-column">
+		<% if (locals.page == 'home') { %>
+
+			<article class="item-12 card-teaser">
+			  <%- locals.content %>
+			</article>
+
+		<% } else if (locals.page == 'test') { %>
+
+			<% tracks.forEach(function(track){ %>
+				<%- include('track', {track}) %>
+			<% }) %>
+
+		<% } else if (locals.page == 'login') { %>
+
+			<% if (locals.content.statusCode <= 200) { %>
+				<%- locals.content.body %>
+			<% } else { %>
+				<%- include('error', {locals}) %>
+			<% } %>
+
+		<% } else { %>
+
+			<%- include('dump', {locals}) %>
+
+		<% } %>
+	</main>
+	<script src="js/app.js" charset="utf-8"></script>
+</body>
+
+</html>
